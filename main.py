@@ -5,6 +5,7 @@ from replit import db
 import commands as c
 
 TOKEN = os.environ['TOKEN']
+CHANNEL_ID = int(os.environ['Channel ID'])
 
 
 client = c.client
@@ -12,19 +13,18 @@ client = c.client
 
 @tasks.loop(minutes = 1)
 async def awardpoints():
-  channel = client.get_channel(349575540073693186)
+  channel = client.get_channel(CHANNEL_ID)
   members = channel.members
   for i in members:
-    i = str(i)
-    if i in db['ids']:
-      points = db['ids'].get(i)
-      points += 1
-      db['ids'].update({i: points})
-  
-    else:
-      db['ids'].update({i: 1})
-
-  print(db['ids'])
+    if not i.bot:
+      i = str(i)
+      if i in db['ids']:
+        points = db['ids'].get(i)
+        points += 1
+        db['ids'].update({i: points})
+    
+      else:
+        db['ids'].update({i: 1})
 
 
 @client.command()
