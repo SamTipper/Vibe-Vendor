@@ -58,7 +58,7 @@ async def create(ctx, arg, arg2, player):
     while length in db['bets']:
       length += 1
     db['bets'].update({length: [arg, arg2, player]})
-    await ctx.send(f"Bet created, it's ID is: {length}")
+    await ctx.send(f"Bet created, its ID is: {length}")
 
 
 async def get_points(player):
