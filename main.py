@@ -31,6 +31,10 @@ async def awardpoints():
 async def points(ctx, arg=None):
   await c.points(ctx, arg)
 
+@client.command()
+async def bet(ctx, arg=None, arg2=None):
+  await c.bet(ctx, arg, arg2)
+
 
 @client.event
 async def on_ready():
